@@ -1,0 +1,87 @@
+    {% extends "base.html" %}
+
+    {% block title %}Car Detail{% endblock title %}
+
+    {% block content %}
+    {%set i = 0 %}
+    <div class="col-md-12" style="padding: 1%;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="toast show align-items-center text-white bg-primary border-0"
+                role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                <div class="d-flex">
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="container-fluid text-center" style="margin: 3rem;">
+        <img src="{{ car.pic1 }}" class="img-fluid" alt="{{ car.color }} {{ car.make }} {{car.model}}">
+        <div class="container-fluid" style="margin: 3rem;">
+            <h1>{{ car.make }} {{ car.model }}</h5>
+            <dl class="row mx-auto">
+                <dt class="col-sm-3" style="text-align: right">Color:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.color }}</dd>
+
+                <dt class="col-sm-3" style="text-align: right">Mileage:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.mileage }}</dd>
+
+                <dt class="col-sm-3" style="text-align: right">VIN:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.vin }}</dd>
+                
+                <dt class="col-sm-3" style="text-align: right">Condition:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.condition }}</dd>
+
+                <dt class="col-sm-3" style="text-align: right">Cost:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.cost }}</dd>
+
+                <dt class="col-sm-3" style="text-align: right">Price:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.price }}</dd>
+
+                <dt class="col-sm-3" style="text-align: right">Description:</dt>
+                <dd class="col-sm-9" style="text-align: left">{{ car.description }}</dd>
+
+                <dt class="col-sm-3" style="text-align: right">Picture 1:</dt>
+                <dd class="col-sm-9" style="text-align: left"><img src="{{ car.pic1 }}" class="img-thumbnail" alt="{{ car.color }} {{ car.make }} {{ car.model }}" width="250"></dd>
+
+                {% if car.pic2 -%}
+                <dt class="col-sm-3" style="text-align: right">Picture 2:</dt>
+                <dd class="col-sm-9" style="text-align: left"><img src="{{ car.pic2 }}" class="img-thumbnail" alt="{{ car.color }} {{ car.make }} {{ car.model }}" width="250"></dd>
+                {% endif %}
+
+                {% if car.pic3 -%}
+                <dt class="col-sm-3" style="text-align: right">Picture 3:</dt>
+                <dd class="col-sm-9" style="text-align: left"><img src="{{ car.pic3 }}" class="img-thumbnail" alt="{{ car.color }} {{ car.make }} {{ car.model }}" width="250"></dd>
+                {% endif %}
+
+                {% if car.sold == True -%}
+                    <dt class="col-sm-3" style="text-align: right">Sold By:</dt>
+                    <dd class="col-sm-9" style="text-align: left">{{ car.sold_by }}</dd>
+                {% else -%}
+                    <dt class="col-sm-3" style="text-align: right">Not Sold</dt>
+                {% endif %}
+            </dl>
+            <div class="row justify-content-start">
+                <div class="col-4">
+                    {% if car.active == True -%}
+                        <a href="{{ url_for('delete_car', cid=car.carId) }}">Delete</a>
+                    {% else -%}
+                        <a href="{{ url_for('activate_car', cid=car.carId) }}">Activate</a>
+                    {% endif %}
+                </div>
+                <div class="col-4">
+                    <a href="{{ url_for('get_all_vehicles') }}">Return to Vehicle List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    {% endblock content %}

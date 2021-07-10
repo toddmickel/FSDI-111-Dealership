@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}All Cars{% endblock title %}
+
+{% block content %}
+{%set i = 0 %}
+<div class="col-md-12" style="padding: 1%;">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class="toast show align-items-center text-white bg-primary border-0"
+        role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ message }}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+  <div class="row">
+  {% for car in car_list %}
+  <div class="card" style="width: 18rem; margin: 0.5%;">
+      <img src="{{ car.pic1 }}" class="card-img-top" alt="{{ car.color }} {{ car.make }} {{car.model}}">
+      <div class="card-body">
+        <h5 class="card-title">{{ car.make }}</h5>
+        <h6 class="card-subtitle mb-2">{{ car.model }}</h6>
+        <h5 class="card-subtitle mb-2 text-muted">{{ car.color }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Price: {{ "${:,.2f}".format(car.price) }}</h6>
+        <a href="{{ url_for('get_car_detail', cid=car.carId) }}" class="card-link">View Detail</a>
+        <a href="{{ url_for('update_car_form', cid=car.carId) }}" class="card-link">Update</a>
+        {% if car.active == True -%}
+          <a href="{{ url_for('delete_car', cid=car.carId) }}" class="card-link">Delete</a>
+        {% else -%}
+        <a href="{{ url_for('activate_car', cid=car.carId) }}" class="card-link">Activate</a>
+        {% endif %}
+      </div>
+    </div>
+    {% set  i = i+1 %}
+    {% if i%4 == 0 %}
+    </div>
+    <div class="row">
+    {% endif %}
+  {% endfor %}
+  </div>
+</div>
+{% endblock content %}

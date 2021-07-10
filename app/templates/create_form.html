@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Enter Car Data{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form method="POST" action="/cars" class="form" role="form">
+        {{ form.csrf_token }}
+        <div class="form-group col-md-12">{{ wtf.form_field(
+                                                        form.make, class='form-control',
+                                                        placeholder='Make')
+                                            }}</div>
+        <div class="row">
+            <div class="form-group col-md-12">{{ wtf.form_field(
+                                                        form.model, class='form-control',
+                                                        placeholder='Model')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.mileage, class='form-control',
+                                                    placeholder='000000.0')
+                                                }}</div>
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.color, class='form-control',
+                                                    placeholder='Color')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">{{ wtf.form_field(
+                                                    form.vin, class='form-control',
+                                                    placeholder='VIN')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.condition, class='form-control')
+                                                }}</div>
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.cost, class='form-control',
+                                                    placeholder='0000.00')
+                                                }}</div>
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.price, class='form-control',
+                                                    placeholder='0000.00')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">{{ wtf.form_field(
+                                                    form.description, class='form-control')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8">{{ wtf.form_field(
+                                                    form.pic1, class='form-control',
+                                                    placeholder='http://www.pic.com')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8">{{ wtf.form_field(
+                                                    form.pic2, class='form-control',
+                                                    placeholder='http://www.pic.com')
+                                                }}</div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8">{{ wtf.form_field(
+                                                    form.pic3, class='form-control',
+                                                    placeholder='http://www.pic.com')
+                                                }}</div>
+        </div>
+<!--         <div class="row">
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.sold, class='form-control')
+                                                }}
+            </div>
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.sold_by, class='form-control',
+                                                    value=0)
+                                                }}
+            </div>
+        </div> -->
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-success" style="margin-top:10px; width: 100%;">Create Car</button>
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
