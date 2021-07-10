@@ -22,15 +22,26 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ url_for('get_index') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('get_all_vehicles') }}">List Active Vehicles</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="vehicleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Vehicles
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="vehicleDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('get_all_vehicles') }}">List Active Vehicles</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('get_inactive_vehicles') }}">List Inactive Vehicles</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('create_car_form') }}">Enter New Vehicle</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('get_inactive_vehicles') }}">List Inactive Vehicles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('create_car_form') }}">Enter New Vehicle</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="employeeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Employees
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="employeeDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('get_all_employees') }}">List Active Employees</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('get_inactive_employees') }}">List Inactive Employees</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('create_employee_form') }}">Enter New Employee</a></li>
+                        </ul>
+                    </li>    
                 </ul>
             </div>
         </div>

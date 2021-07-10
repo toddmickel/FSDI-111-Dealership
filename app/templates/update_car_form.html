@@ -72,15 +72,19 @@
                                                     value=car.pic3)
                                                 }}</div>
         </div>
-<!--         <div class="row">
+        <div class="row">
             <div class="form-group col-md-6">{{ wtf.form_field(
-                                                    form.sold, class='form-control')
+                                                    form.sold, class='form-control', checked=car.sold)
                                                 }}</div>
             <div class="form-group col-md-6">{{ wtf.form_field(
                                                     form.sold_by, class='form-control',
                                                     value=car.sold_by)
                                                 }}</div>
-        </div> -->
+            <div class="form-group col-md-6">{{ wtf.form_field(
+                                                    form.sales_price, class='form-control',
+                                                    value = car.sales_price, active=True)
+                                                }}</div>
+        </div> 
         <div class="form-group col-md-12">
             <button type="submit" class="btn btn-success" style="margin-top:10px; width: 100%;">Update Car</button>
         </div>

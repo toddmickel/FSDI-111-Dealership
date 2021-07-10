@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Employee Sales Information{% endblock title %}
+
+{% block content %}
+{% set p = namespace(value=0) %}
+{% set n = namespace(value=0) %}
+{% for car in car_list %}
+    {% if car.sold_by == employee.id -%}
+        {% set n.value = n.value + 1 %}
+    {% endif %}
+{% endfor %}
+
+<div class="col-md-12" style="padding: 1%;">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="toast show align-items-center text-white bg-primary border-0"
+            role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+            <div class="d-flex">
+            <div class="toast-body">
+                {{ message }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <div class="container-fluid text-center" style="margin: 3rem;">
+        <h1>{{ employee.first_name }} {{ employee.last_name }}</h5>
+        {% if n.value == 0 -%}
+            <p>Employee has not yet sold any cars.  Time to get to work!</p>
+        {% else -%}
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Car ID</th>
+                            <th scope="col">Make</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Cost</th>
+                            <th scope="col">Sales Price</th>
+                            <th scope="col">Profit/Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            {% for car in car_list %}
+                {% if car.sold_by == employee.id -%}
+                    {% set prof = car.sales_price - car.cost %}
+                    {% set p.value = p.value + prof %}
+                    <tr>
+                        <th scope="row">{{ car.carId }}</th>
+                        <td>{{ car.make }}</td>
+                        <td>{{ car.model }}</td>
+                        <td>{{ car.cost }}</td>
+                        <td>{{ car.sales_price }}</td>
+                        <td>{{ prof }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td></td><td></td><td></td><td></td><th scope="row">Total P/L</th>"
+                <td>{{ p.value }}</td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            <div class="row">                        
+        {% endif %}
+        </div>
+    </div>
+    <p class="text-center"><a href="{{ url_for('update_employee_form', id=employee.id) }}">Update Employee</a></p>
+</div>
+
+{% endblock content %}

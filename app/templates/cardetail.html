@@ -3,7 +3,7 @@
     {% block title %}Car Detail{% endblock title %}
 
     {% block content %}
-    {%set i = 0 %}
+
     <div class="col-md-12" style="padding: 1%;">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -63,7 +63,9 @@
 
                 {% if car.sold == True -%}
                     <dt class="col-sm-3" style="text-align: right">Sold By:</dt>
-                    <dd class="col-sm-9" style="text-align: left">{{ car.sold_by }}</dd>
+                    <dd class="col-sm-9" style="text-align: left">{{ car.sold_by }} - {{ employee.first_name }} {{ employee.last_name }}</dd>
+                    <dt class="col-sm-3" style="text-align: right">Sales Price:</dt>
+                    <dd class="col-sm-9" style="text-align: left">{{ car.sales_price }}</dd>
                 {% else -%}
                     <dt class="col-sm-3" style="text-align: right">Not Sold</dt>
                 {% endif %}

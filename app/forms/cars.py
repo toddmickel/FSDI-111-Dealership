@@ -42,6 +42,8 @@ class CarForm(Form):
                         [validators.Optional()], render_kw=style)
     pic3 = StringField("Picture 3 URL (Optional)",
                         [validators.Optional()], render_kw=style)
-    sold = BooleanField("Sold?", render_kw=style)
+    sold = BooleanField("Sold?", render_kw=style, false_values=('False', 'false', ''))
     sold_by = IntegerField("Sold By (ID number)",
+                        [validators.Optional()], render_kw=style)
+    sales_price = FloatField("Sales Price",
                         [validators.Optional()], render_kw=style)

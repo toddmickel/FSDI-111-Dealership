@@ -16,12 +16,24 @@ class Car(db.Model):
     pic3 = db.Column(db.String, nullable=True, default=None)
     sold = db.Column(db.Boolean, nullable=False, default=0)
     sold_by = db.Column(db.Integer, nullable=True, default=None)
+    sales_price = db.Column(db.Numeric(precision=7, scale=2), nullable=True)
     active = db.Column(db.Boolean, nullable=False, default=1)
 
     def __repr__(self):
         return "<Vehicle %r> %r %r VIN: %r" % (
             self.carId, self.make, self.model, self.vin
             )
+
+class Employee(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
+    active = db.Column(db.Boolean, nullable=False, default=1)
+
+    def __repr__(self):
+        return "Employee #%r: %r %r" % (
+            self.id, self.first_name, self.last_name
+        )
 
 def scan():
     cursor = db.query.all()
